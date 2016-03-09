@@ -40,7 +40,7 @@
 //    ARSegmentPageController *pager = [[ARSegmentPageController alloc] initWithControllers:collectionView,table,table1,nil];
     
     ARSegmentPageController *pager = [[ARSegmentPageController alloc] init];
-    [pager setViewControllers:@[table,collectionView,table1]];
+    [pager setViewControllers:@[table,collectionView,table1] shouldUpdateConfig:NO];
     pager.segmentMiniTopInset = 64;
     self.pager = pager;
     

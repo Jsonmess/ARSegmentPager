@@ -24,7 +24,8 @@
 
 -(instancetype)initWithControllers:(UIViewController<ARSegmentControllerDelegate> *)controller,... NS_REQUIRES_NIL_TERMINATION;
 
--(void)setViewControllers:(NSArray *)viewControllers;
+
+-(void)setViewControllers:(NSArray *)viewControllers shouldUpdateConfig:(BOOL)isReconfig;
 
 //override this method to custom your own header view
 -(UIView<ARSegmentPageControllerHeaderProtocol> *)customHeaderView;

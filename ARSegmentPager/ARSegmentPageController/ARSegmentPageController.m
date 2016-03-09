@@ -74,11 +74,22 @@ const void* _ARSEGMENTPAGE_CURRNTPAGE_SCROLLVIEWOFFSET = &_ARSEGMENTPAGE_CURRNTP
 }
 
 #pragma mark - public methods
-
--(void)setViewControllers:(NSArray *)viewControllers
+/**
+ *  set the childs
+ *
+ *  @param viewControllers childViewControllers
+ *  @param isReconfig      should reconfig when set childVCs dynamically
+ */
+-(void)setViewControllers:(NSArray *)viewControllers shouldUpdateConfig:(BOOL)isReconfig
 {
     [self.controllers removeAllObjects];
     [self.controllers addObjectsFromArray:viewControllers];
+    //如果在显示过程中动态设置子栏数量
+    if (isReconfig)
+    {
+        [self _baseConfigs];
+        [self _baseLayout];
+    }
 }
 
 #pragma mark - override methods
