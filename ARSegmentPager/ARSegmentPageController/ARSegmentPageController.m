@@ -99,6 +99,10 @@ const void* _ARSEGMENTPAGE_CURRNTPAGE_SCROLLVIEWOFFSET = &_ARSEGMENTPAGE_CURRNTP
     return [[ARSegmentPageHeader alloc] init];
 }
 
+-(ARSegmentView*)customSegmentView
+{
+    return [[ARSegmentView alloc] init];
+}
 #pragma mark - private methdos
 
 -(void)_setUp
@@ -117,12 +121,19 @@ const void* _ARSEGMENTPAGE_CURRNTPAGE_SCROLLVIEWOFFSET = &_ARSEGMENTPAGE_CURRNTP
         self.view.preservesSuperviewLayoutMargins = YES;   
     }
     self.extendedLayoutIncludesOpaqueBars = NO;
-    self.headerView = [self customHeaderView];
+    if (!self.headerView)
+    {
+        //一般headerView不会动态配置，暂这样写
+        self.headerView = [self customHeaderView];
+    }
     self.headerView.clipsToBounds = YES;
     [self.view addSubview:self.headerView];
     
-    
-    self.segmentView = [[ARSegmentView alloc] init];
+    if (self.segmentView)
+    {
+        [self.segmentView removeFromSuperview];
+    }
+    self.segmentView = [self customSegmentView];
     [self.segmentView.segmentControl addTarget:self action:@selector(segmentControlDidChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.segmentView];
     
